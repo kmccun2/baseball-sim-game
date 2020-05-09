@@ -15,7 +15,7 @@ const Batter = ({ active, setActive, id, batter }) => {
         id={id}
         onClick={(e) => handleClick(e)}
       >
-        {batter.batter === null ? 'Yo' : 'Nah'}
+        {batter.batter === null ? 'No' : 'Yes'}
       </div>
     </div>
   )
