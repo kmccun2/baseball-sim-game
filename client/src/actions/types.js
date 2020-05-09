@@ -1,0 +1,5 @@
+export const SET_ROSTER = 'SET_ROSTER'
+export const CREATE_LINEUP = 'CREATE_LINEUP'
+export const SET_ACTIVE = 'SET_ACTIVE'
+export const ASSIGN_PLAYER = 'ASSIGN_PLAYER'
+export const UPDATE_LINEUP = 'UPDATE_LINEUP'

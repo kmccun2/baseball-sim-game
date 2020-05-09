@@ -1,0 +1,68 @@
+body {
+  min-height: 95vh;
+  font-family: 'Jura', sans-serif !important;
+}
+
+.bold-e {
+  font-weight: 800 !important;
+}
+.bold-f {
+  font-weight: 500 !important;
+}
+
+// LINEUP
+.lineup {
+  margin-top: 40px;
+}
+
+.batter {
+  width: 11.11%;
+  height: auto;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 2.3;
+  background-color: #cecece;
+}
+
+.icon-active {
+  box-shadow: 0 0 7px 4px #26cfff;
+}
+
+// ROSTER
+.roster {
+  text-align: center;
+  font-size: 28px;
+  margin: 40px 0 10px 0;
+}
+.player {
+  display: inline-block !important;
+  cursor: pointer;
+}
+.card-title {
+  font-size: 1.2em !important;
+  color: #0579f5 !important;
+}
+.stat-title {
+  font-weight: 800;
+}
+.stat-text {
+  float: right;
+  font-weight: 500;
+}
+.credit {
+  text-align: center;
+  padding: 30px;
+}
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
