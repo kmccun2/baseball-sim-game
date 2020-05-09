@@ -13,4 +13,4 @@ npm install
 # Serve on localhost:3000
 npm run dev
 ```
-# A sample upload file can be found in 
+# A sample upload file can be found in client/public/uploads/players.csv
