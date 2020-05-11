@@ -4,92 +4,101 @@ import * as Yup from 'yup'
 import Errors from './Errors'
 import { connect } from 'react-redux'
 import { simulateGame } from '../actions/lineup'
+import Results from './Results'
 
-const Settings = (lineup, simulateGame) => {
+const Settings = ({ lineup, simulateGame, sim_results }) => {
   const validationSchema = Yup.object().shape({
     games: Yup.number()
       .typeError('Games input must be a number.')
       .min(1, 'Must enter a number of games')
       .max(
-        40000,
+        4000,
         'Invalid input. You may have exceeded the max number of games.'
       )
       .required("Please enter a number of games you'd like to simulate."),
     innings: Yup.number()
       .typeError('Innings input must be a number.')
       .min(1, 'Must enter a number of innings per game')
-      .max(9, 'Invalid input. Innings must be a value less than 10.')
+      .max(100, 'Invalid input. Innings must be a value less than 10.')
       .required("Please enter a number of innings you'd like to simulate."),
   })
 
   return (
-    <Formik
-      initialValues={{ games: 40, innings: 7 }}
-      validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setSubmitting(true)
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        isSubmitting,
-        handleSubmit,
-      }) => (
-        <Fragment>
-          <div className='settings-header'>
-            Enter the number of games and innings per game you'd like to play.
-          </div>
-          <Errors touched={touched.games} message={errors.games} />
-          <Errors touched={touched.innings} message={errors.innings} />
+    <Fragment>
+      <Formik
+        initialValues={{ games: 40, innings: 7 }}
+        validationSchema={validationSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          setSubmitting(true)
+          simulateGame(lineup, parseInt(values.games), parseInt(values.innings))
+          setSubmitting(false)
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          isSubmitting,
+          handleSubmit,
+        }) => (
+          <Fragment>
+            <div className='settings-header'>
+              Enter the number of games and innings per game you'd like to play.
+            </div>
+            <Errors touched={touched.games} message={errors.games} />
+            <Errors touched={touched.innings} message={errors.innings} />
 
-          <form className='settings-form' onSubmit={handleSubmit}>
-            <label htmlFor='games'>Games: </label>
-            <br></br>
-            <input
-              type='text'
-              name='games'
-              id='games'
-              className={
-                touched.games && errors.games ? 'input has-error' : 'input'
-              }
-              onChange={handleChange}
-              value={values.games}
-            />
+            <form className='settings-form' onSubmit={handleSubmit}>
+              <label htmlFor='games'>Games: </label>
+              <br></br>
+              <input
+                type='text'
+                name='games'
+                id='games'
+                className={
+                  touched.games && errors.games ? 'input has-error' : 'input'
+                }
+                onChange={handleChange}
+                value={values.games}
+              />
 
-            <br></br>
-            <label htmlFor='innings'>Innings (per game): </label>
-            <br></br>
-            <input
-              type='text'
-              name='innings'
-              id='innings'
-              className={
-                touched.innings && errors.innings ? 'input has-error' : 'input'
-              }
-              value={values.innings}
-              onChange={handleChange}
-            />
+              <br></br>
+              <label htmlFor='innings'>Innings (per game): </label>
+              <br></br>
+              <input
+                type='text'
+                name='innings'
+                id='innings'
+                className={
+                  touched.innings && errors.innings
+                    ? 'input has-error'
+                    : 'input'
+                }
+                value={values.innings}
+                onChange={handleChange}
+              />
 
-            <br></br>
-            <button
-              type='submit'
-              value='play'
-              className='playball'
-              disabled={isSubmitting}
-            >
-              Play Ball!
-            </button>
-          </form>
-        </Fragment>
-      )}
-    </Formik>
+              <br></br>
+              <button
+                type='submit'
+                value='play'
+                className='playball'
+                disabled={isSubmitting}
+              >
+                Play Ball!
+              </button>
+            </form>
+          </Fragment>
+        )}
+      </Formik>
+      {sim_results && <Results />}
+    </Fragment>
   )
 }
 const MapStateToProps = (state) => ({
   lineup: state.lineupReducer.lineup,
+  sim_results: state.lineupReducer.sim_results,
 })
 
 export default connect(MapStateToProps, { simulateGame })(Settings)

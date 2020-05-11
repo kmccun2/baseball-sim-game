@@ -2,7 +2,6 @@ import React from 'react'
 import FileUpload from './components/FileUpload'
 import Roster from './components/Roster'
 import Lineup from './components/Lineup'
-import Game from './components/Game'
 
 // Redux
 import { Provider } from 'react-redux'
@@ -19,7 +18,6 @@ const App = () => {
         <FileUpload />
         <Lineup />
         <Roster />
-        <Game />
         <div className='credit'>Application created by Kurt McCune.</div>
       </div>
     </Provider>

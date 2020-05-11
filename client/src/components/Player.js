@@ -17,7 +17,6 @@ const Player = ({
   active,
   lineup,
   assignPlayer,
-  updateLineup,
 }) => {
   // ASSIGN PLAYER TO ACTIVE LINEUP SPOT
   const handleClick = () => {
