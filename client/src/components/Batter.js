@@ -12,10 +12,17 @@ const Batter = ({ active, setActive, id, batter }) => {
     <div className='batter'>
       <div
         className={active === id ? 'icon icon-active' : 'icon'}
+        style={
+          batter.batter
+            ? { backgroundColor: batter.color, color: 'white' }
+            : { backgroundColor: '#cecece' }
+        }
         id={id}
         onClick={(e) => handleClick(e)}
       >
-        {batter.batter === null ? 'No' : 'Yes'}
+        {batter.batter === null
+          ? batter.id + 1
+          : batter.batter.First[0] + batter.batter.Last[0]}
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Card } from 'react-bootstrap'
 import { assignPlayer, updateLineup } from '../actions/lineup'
 import { connect } from 'react-redux'

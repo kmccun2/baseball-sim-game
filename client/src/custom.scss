@@ -37,6 +37,40 @@ body {
 .icon-active {
   box-shadow: 0 0 7px 4px #26cfff;
 }
+// GAME SETTINGS
+.game-settings {
+  margin: 90px 0 75px 0;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+
+.settings-form.input {
+  text-align: center;
+}
+
+label {
+  margin: 1rem 0 0.5rem 0;
+}
+.input {
+  text-align: center;
+}
+
+.has-errors {
+  border: 1px solid red;
+}
+
+.invalid {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+.playball {
+  margin-top: 20px;
+  width: 12.65rem;
+}
 
 // ROSTER
 .roster {

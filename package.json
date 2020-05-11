@@ -15,7 +15,9 @@
   "dependencies": {
     "bootstrap": "^4.4.1",
     "express": "^4.16.4",
-    "express-fileupload": "^1.1.6"
+    "express-fileupload": "^1.1.6",
+    "node-sass": "^4.14.1",
+    "yup": "^0.28.5"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

@@ -7,6 +7,7 @@ const initialState = {
   lineup: [],
   loading: true,
   active: 0,
+  numActive: 0,
 }
 
 const lineupReducer = (state = initialState, action) => {
@@ -28,7 +29,9 @@ const lineupReducer = (state = initialState, action) => {
     case ASSIGN_PLAYER:
       return {
         ...state,
-        lineup: payload,
+        lineup: payload.lineup,
+        active: payload.active,
+        numActive: payload.numActive,
       }
     case UPDATE_LINEUP:
       return {

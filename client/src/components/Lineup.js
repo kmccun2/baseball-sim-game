@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 import Batter from './Batter'
 import { connect } from 'react-redux'
-
-const Lineup = ({ lineup }) => {
+import Settings from './Settings'
+const Lineup = ({ lineup, numActive }) => {
   return (
     <Fragment>
       {lineup.length > 0 && (
@@ -18,12 +18,18 @@ const Lineup = ({ lineup }) => {
           ))}
         </div>
       )}
+      {numActive === 9 && (
+        <div className='game-settings'>
+          <Settings />
+        </div>
+      )}
     </Fragment>
   )
 }
 
 const MapStateToProps = (state) => ({
   lineup: state.lineupReducer.lineup,
+  numActive: state.lineupReducer.numActive,
 })
 
 export default connect(MapStateToProps, {})(Lineup)

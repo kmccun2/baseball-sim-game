@@ -10,6 +10,7 @@ const FileUpload = ({ setRoster, createLineup, loading }) => {
   const [file, setFile] = useState('')
   const [filename, setFilename] = useState('Choose File')
   const [message, setMessage] = useState('')
+  const [isSubmitted, setSubmitted] = useState(false)
 
   const onChange = (e) => {
     setFile(e.target.files[0])
@@ -20,7 +21,7 @@ const FileUpload = ({ setRoster, createLineup, loading }) => {
     e.preventDefault()
     const formData = new FormData()
     formData.append('file', file)
-
+    setSubmitted(true)
     try {
       const res = await axios.post('/upload', formData, {
         headers: {
@@ -63,6 +64,7 @@ const FileUpload = ({ setRoster, createLineup, loading }) => {
           type='submit'
           value='Upload'
           className='btn btn-primary btn-block'
+          disabled={isSubmitted}
         />
       </form>
     </Fragment>
