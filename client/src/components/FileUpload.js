@@ -2,15 +2,17 @@ import React, { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import { setRoster } from '../actions/roster'
 import { createLineup } from '../actions/lineup'
-
-import Progress from './progress'
+import Message from './Message.js'
 import axios from 'axios'
+import Progress from './Progress'
 
-const FileUpload = ({ setRoster, createLineup, loading }) => {
+const FileUpload = () => {
   const [file, setFile] = useState('')
   const [filename, setFilename] = useState('Choose File')
+  const [uploadedFile, setUploadedFile] = useState({})
   const [message, setMessage] = useState('')
-  const [isSubmitted, setSubmitted] = useState(false)
+  const [uploadPercentage, setUploadPercentage] = useState(0)
+  const [isSubmitted, setIsSubmitted] = useState('')
 
   const onChange = (e) => {
     setFile(e.target.files[0])
@@ -19,19 +21,31 @@ const FileUpload = ({ setRoster, createLineup, loading }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitted(true)
     const formData = new FormData()
     formData.append('file', file)
-    setSubmitted(true)
+
     try {
       const res = await axios.post('/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-      })
-      const { fileName } = res.data
+        onUploadProgress: (progressEvent) => {
+          setUploadPercentage(
+            parseInt(
+              Math.round((progressEvent.loaded * 99) / progressEvent.total)
+            )
+          )
 
-      setMessage('File Uploaded')
+          // Clear percentage
+          setTimeout(() => setUploadPercentage(0), 5000)
+        },
+      })
+
+      const { fileName, filePath } = res.data
+      setUploadedFile({ fileName, filePath })
       const csvPath = '/uploads/' + fileName
+      setMessage('File Uploaded')
 
       setRoster(csvPath)
       createLineup()
@@ -39,14 +53,13 @@ const FileUpload = ({ setRoster, createLineup, loading }) => {
       if (err.response.status === 500) {
         setMessage('There was a problem with the server')
       } else {
-        setMessage(err.response.data.msg)
       }
     }
   }
 
   return (
     <Fragment>
-      {message && loading ? <Progress /> : null}
+      {message ? <Message msg={message} /> : null}
       <form onSubmit={onSubmit}>
         <div className='custom-file mb-4'>
           <input
@@ -60,13 +73,23 @@ const FileUpload = ({ setRoster, createLineup, loading }) => {
           </label>
         </div>
 
+        <Progress percentage={uploadPercentage} />
+
         <input
           type='submit'
           value='Upload'
-          className='btn btn-primary btn-block'
+          className='btn btn-primary btn-block mt-4'
           disabled={isSubmitted}
         />
       </form>
+      {uploadedFile ? (
+        <div className='row mt-5'>
+          <div className='col-md-6 m-auto'>
+            <h3 className='text-center'>{uploadedFile.fileName}</h3>
+            <img style={{ width: '100%' }} src={uploadedFile.filePath} alt='' />
+          </div>
+        </div>
+      ) : null}
     </Fragment>
   )
 }
