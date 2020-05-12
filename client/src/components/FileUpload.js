@@ -2,21 +2,35 @@ import React, { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import { setRoster } from '../actions/roster'
 import { createLineup } from '../actions/lineup'
-import Message from './Message.js'
+// import Message from './Message'
 import axios from 'axios'
-import Progress from './Progress'
+// import Progress from './Progress'
+import { Spinner } from 'react-bootstrap'
 
 const FileUpload = () => {
   const [file, setFile] = useState('')
+  const [fileloading1, setFileLoading1] = useState(false)
+  const [fileloading2, setFileLoading2] = useState(false)
+  const [fileloading3, setFileLoading3] = useState(false)
   const [filename, setFilename] = useState('Choose File')
   const [uploadedFile, setUploadedFile] = useState({})
-  const [message, setMessage] = useState('')
-  const [uploadPercentage, setUploadPercentage] = useState(0)
+  // const [message, setMessage] = useState('')
+  // const [uploadPercentage, setUploadPercentage] = useState(0)
   const [isSubmitted, setIsSubmitted] = useState('')
 
   const onChange = (e) => {
     setFile(e.target.files[0])
     setFilename(e.target.files[0].name)
+    setFileLoading1(true)
+    setTimeout(() => setFileLoading2(true), 100)
+    setTimeout(() => setFileLoading3(true), 200)
+    setIsSubmitted(true)
+    setTimeout(() => {
+      setFileLoading1(false)
+      setFileLoading2(false)
+      setFileLoading3(false)
+      setIsSubmitted(false)
+    }, 4000)
   }
 
   const onSubmit = async (e) => {
@@ -31,27 +45,31 @@ const FileUpload = () => {
           'Content-Type': 'multipart/form-data',
         },
         onUploadProgress: (progressEvent) => {
-          setUploadPercentage(
-            parseInt(
-              Math.round((progressEvent.loaded * 99) / progressEvent.total)
-            )
-          )
+          // setUploadPercentage(
+          //   parseInt(
+          //     Math.round((progressEvent.loaded * 99) / progressEvent.total)
+          //   )
+          // )
 
           // Clear percentage
-          setTimeout(() => setUploadPercentage(0), 5000)
+          setTimeout(() => {
+            setFileLoading1(false)
+            setFileLoading2(false)
+            setFileLoading3(false)
+          }, 5000)
         },
       })
 
       const { fileName, filePath } = res.data
       setUploadedFile({ fileName, filePath })
       const csvPath = '/uploads/' + fileName
-      setMessage('File Uploaded')
+      // setMessage('File Uploaded')
 
       setRoster(csvPath)
       createLineup()
     } catch (err) {
       if (err.response.status === 500) {
-        setMessage('There was a problem with the server')
+        // setMessage('There was a problem with the server')
       } else {
       }
     }
@@ -59,7 +77,7 @@ const FileUpload = () => {
 
   return (
     <Fragment>
-      {message ? <Message msg={message} /> : null}
+      {/* {message ? <Message msg={message} /> : null} */}
       <form onSubmit={onSubmit}>
         <div className='custom-file mb-4'>
           <input
@@ -73,7 +91,7 @@ const FileUpload = () => {
           </label>
         </div>
 
-        <Progress percentage={uploadPercentage} />
+        {/* <Progress percentage={uploadPercentage} /> */}
 
         <input
           type='submit'
@@ -90,6 +108,17 @@ const FileUpload = () => {
           </div>
         </div>
       ) : null}
+      {fileloading1 && (
+        <div className='spinner-container'>
+          <Spinner className='spinner' animation='grow' variant='primary' />
+          {fileloading2 && (
+            <Spinner className='spinner' animation='grow' variant='primary' />
+          )}
+          {fileloading3 && (
+            <Spinner className='spinner' animation='grow' variant='primary' />
+          )}
+        </div>
+      )}
     </Fragment>
   )
 }

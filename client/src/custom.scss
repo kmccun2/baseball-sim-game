@@ -9,7 +9,13 @@ body {
 .bold-f {
   font-weight: 500 !important;
 }
-
+.spinner-container {
+  width: 100%;
+  text-align: center;
+}
+.spinner {
+  display: inline-block;
+}
 // LINEUP
 .lineup {
   margin-top: 40px;
