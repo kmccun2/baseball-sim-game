@@ -12,7 +12,7 @@ const App = () => {
     <Provider store={store}>
       <div className='container mt-4'>
         <h4 className='display-4 text-center mb-4'>
-          <i className='fab fa-react' /> React File Upload
+          <i className='fab fa-react' /> Test My Lineup
         </h4>
 
         <FileUpload />

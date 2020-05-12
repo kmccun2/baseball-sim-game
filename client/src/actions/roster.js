@@ -11,6 +11,7 @@ export const setRoster = (csv) => async (dispatch) => {
     var lines = csvfile.split('\n')
     var result = []
     var headers = lines[1].split(',')
+    let all_numbers = []
 
     for (var i = 1; i < lines.length; i++) {
       var obj = {}
@@ -19,13 +20,21 @@ export const setRoster = (csv) => async (dispatch) => {
       for (var j = 0; j < headers.length; j++) {
         obj[headers[j]] = currentline[j]
       }
-      if (
-        obj.Number !== '' &&
-        obj.Number !== 'Number' &&
-        obj.Number !== 'Team' &&
-        obj.Number !== 'Glossary:'
-      ) {
-        result.push(obj)
+
+      // CHECK TO MAKE SURE ROSTER NUMBER DOESN'T EXIST BEFORE ADDING
+      if (all_numbers.includes(currentline[0]) === false) {
+        all_numbers.push(currentline[0])
+        if (currentline[0] === 'Team') {
+          break
+        }
+        if (
+          obj.Number !== '' &&
+          obj.Number !== 'Number' &&
+          obj.Number !== 'Team' &&
+          obj.Number !== 'Glossary:'
+        ) {
+          result.push(obj)
+        }
       }
     }
     dispatch({
