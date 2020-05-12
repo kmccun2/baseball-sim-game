@@ -63,7 +63,7 @@ const FileUpload = ({ roster, createLineup, setRoster }) => {
       })
 
       const { fileName } = res.data
-      const csvPath = '/uploads/' + fileName
+      const csvPath = '/uploads/lineup.csv'
       // setMessage('File Uploaded')
 
       setRoster(csvPath)

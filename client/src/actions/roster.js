@@ -8,7 +8,10 @@ export const setRoster = (csv) => async (dispatch) => {
 
     // CREATE ROSTER FROM CSV
     let csvfile = res.data
+    console.log(csvfile)
+
     var lines = csvfile.split('\n')
+    console.log(csvfile)
     var result = []
     var headers = lines[1].split(',')
     let all_numbers = []
@@ -17,7 +20,7 @@ export const setRoster = (csv) => async (dispatch) => {
       var obj = {}
       var currentline = lines[i].split(',')
 
-      for (var j = 0; j < headers.length; j++) {
+      for (var j = 0; j < 53; j++) {
         obj[headers[j]] = currentline[j]
       }
 

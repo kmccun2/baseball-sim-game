@@ -213,24 +213,12 @@ export const simulateGame = (lineup, games, innings) => async (dispatch) => {
   }
   const atBat = (batter, games, innings) => {
     // CALCULATE CHANCE OF BATTER GETTING A SINGLE, DOUBLE, TRIPLE, HR, WALK/HBP, SO, OUT
-    let s_perc =
-      parseInt(batter.batter['1B']) /
-      (parseInt(batter.batter['PA']) + parseInt(batter.batter['HBP']))
-    let d_perc =
-      parseInt(batter.batter['2B']) /
-      (parseInt(batter.batter['PA']) + parseInt(batter.batter['HBP']))
-    let t_perc =
-      parseInt(batter.batter['3B']) /
-      (parseInt(batter.batter['PA']) + parseInt(batter.batter['HBP']))
-    let h_perc =
-      parseInt(batter.batter['HR']) /
-      (parseInt(batter.batter['PA']) + parseInt(batter.batter['HBP']))
-    let w_perc =
-      (parseInt(batter.batter['BB']) + parseInt(batter.batter['HBP'])) /
-      (parseInt(batter.batter['PA']) + parseInt(batter.batter['HBP']))
-    let k_perc =
-      batter.batter['SO'] /
-      (parseInt(batter.batter['PA']) + parseInt(batter.batter['HBP']))
+    let s_perc = parseInt(batter.batter['1B']) / parseInt(batter.batter['PA'])
+    let d_perc = parseInt(batter.batter['2B']) / parseInt(batter.batter['PA'])
+    let t_perc = parseInt(batter.batter['3B']) / parseInt(batter.batter['PA'])
+    let h_perc = parseInt(batter.batter['HR']) / parseInt(batter.batter['PA'])
+    let w_perc = parseInt(batter.batter['BB']) / parseInt(batter.batter['PA'])
+    let k_perc = batter.batter['SO'] / parseInt(batter.batter['PA'])
 
     // ASSIGN AT BAT RESULT
     let outcome = 'Out'

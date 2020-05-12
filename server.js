@@ -14,13 +14,13 @@ app.post('/upload', (req, res) => {
 
   const file = req.files.file
 
-  file.mv(`${__dirname}/client/public/uploads/${file.name}`, (err) => {
+  file.mv(`${__dirname}/client/public/uploads/lineup.csv`, (err) => {
     if (err) {
       console.error(err)
       return res.status(500).send(err)
     }
-
-    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` })
+    console.log(file.name)
+    res.json({ fileName: file.name, filePath: `/uploads/lineup.csv` })
   })
 })
 
