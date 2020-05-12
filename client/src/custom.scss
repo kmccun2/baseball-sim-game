@@ -2,19 +2,96 @@ body {
   min-height: 95vh;
   font-family: 'Jura', sans-serif !important;
 }
-
+#root {
+  min-height: 100vh;
+}
 .bold-e {
   font-weight: 800 !important;
 }
 .bold-f {
   font-weight: 500 !important;
 }
+.logo {
+  height: 95px;
+  margin: 0 auto;
+  display: inherit;
+  margin-bottom: 35px;
+
+  -webkit-animation-name: spin;
+  -webkit-animation-duration: 3000ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+
+  -moz-animation-name: spin;
+  -moz-animation-duration: 3000ms;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+
+  -ms-animation-name: spin;
+  -ms-animation-duration: 3000ms;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-timing-function: linear;
+
+  animation-name: spin;
+  animation-duration: 3000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  @-ms-keyframes spin {
+    from {
+      -ms-transform: rotate(0deg);
+    }
+    to {
+      -ms-transform: rotate(360deg);
+    }
+  }
+  @-moz-keyframes spin {
+    from {
+      -moz-transform: rotate(0deg);
+    }
+    to {
+      -moz-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    from {
+      -webkit-transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+.upload-file {
+  margin-bottom: 25px;
+}
+.custom-file-label {
+  overflow: hidden;
+  word-break: break-all;
+}
 .spinner-container {
   width: 100%;
   text-align: center;
+  margin-top: 40px;
 }
 .spinner {
   display: inline-block;
+}
+.directions {
+  text-align: center;
+  width: auto;
+  margin: 110px 0;
+  border-radius: 5px;
+  color: #e04b40;
+  font-weight: bold;
+  font-size: 18px;
 }
 // LINEUP
 .lineup {
@@ -52,6 +129,9 @@ body {
   text-align: center;
 }
 
+.settings-header {
+  margin-bottom: 30px;
+}
 .settings-form.input {
   text-align: center;
 }
@@ -75,7 +155,7 @@ label {
   display: none;
 }
 .playball {
-  margin-top: 20px;
+  margin-top: 30px;
   width: 12.65rem;
 }
 

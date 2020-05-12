@@ -6,14 +6,15 @@ import { createLineup } from '../actions/lineup'
 import axios from 'axios'
 // import Progress from './Progress'
 import { Spinner } from 'react-bootstrap'
+import Directions from './Directions'
 
-const FileUpload = () => {
+const FileUpload = ({ roster, createLineup, setRoster }) => {
   const [file, setFile] = useState('')
   const [fileloading1, setFileLoading1] = useState(false)
   const [fileloading2, setFileLoading2] = useState(false)
   const [fileloading3, setFileLoading3] = useState(false)
+  const [directions, setDirections] = useState(true)
   const [filename, setFilename] = useState('Choose File')
-  const [uploadedFile, setUploadedFile] = useState({})
   // const [message, setMessage] = useState('')
   // const [uploadPercentage, setUploadPercentage] = useState(0)
   const [isSubmitted, setIsSubmitted] = useState('')
@@ -22,6 +23,7 @@ const FileUpload = () => {
     setFile(e.target.files[0])
     setFilename(e.target.files[0].name)
     setFileLoading1(true)
+    setDirections(false)
     setTimeout(() => setFileLoading2(true), 100)
     setTimeout(() => setFileLoading3(true), 200)
     setIsSubmitted(true)
@@ -60,8 +62,7 @@ const FileUpload = () => {
         },
       })
 
-      const { fileName, filePath } = res.data
-      setUploadedFile({ fileName, filePath })
+      const { fileName } = res.data
       const csvPath = '/uploads/' + fileName
       // setMessage('File Uploaded')
 
@@ -100,14 +101,6 @@ const FileUpload = () => {
           disabled={isSubmitted}
         />
       </form>
-      {uploadedFile ? (
-        <div className='row mt-5'>
-          <div className='col-md-6 m-auto'>
-            <h3 className='text-center'>{uploadedFile.fileName}</h3>
-            <img style={{ width: '100%' }} src={uploadedFile.filePath} alt='' />
-          </div>
-        </div>
-      ) : null}
       {fileloading1 && (
         <div className='spinner-container'>
           <Spinner className='spinner' animation='grow' variant='primary' />
@@ -119,15 +112,12 @@ const FileUpload = () => {
           )}
         </div>
       )}
+      {directions && <Directions />}
     </Fragment>
   )
 }
 
-const MapStateToProps = (state) => ({
-  loading: state.loading,
-})
-
-export default connect(MapStateToProps, {
+export default connect(null, {
   setRoster,
   createLineup,
 })(FileUpload)

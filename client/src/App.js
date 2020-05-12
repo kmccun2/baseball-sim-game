@@ -2,6 +2,7 @@ import React from 'react'
 import FileUpload from './components/FileUpload'
 import Roster from './components/Roster'
 import Lineup from './components/Lineup'
+import logo from '../src/logo.png'
 
 // Redux
 import { Provider } from 'react-redux'
@@ -11,14 +12,12 @@ const App = () => {
   return (
     <Provider store={store}>
       <div className='container mt-4'>
-        <h4 className='display-4 text-center mb-4'>
-          <i className='fab fa-react' /> Test My Lineup
-        </h4>
-
+        <h4 className='display-4 text-center mb-4'>Lineup Simulator</h4>
+        <img src={logo} className='logo' alt='logo'></img>
         <FileUpload />
         <Lineup />
         <Roster />
-        <div className='credit'>Application created by Kurt McCune.</div>
+        <div className='credit'>Created by @kurtisleaux</div>
       </div>
     </Provider>
   )
