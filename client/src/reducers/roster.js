@@ -3,6 +3,7 @@ import {
   NEW_ROSTER,
   SET_BORDER,
   CLEAR_LINEUP_ROSTER,
+  ROSTER_LOADING,
 } from '../actions/types'
 
 const initialState = {
@@ -32,6 +33,11 @@ const rosterReducer = (state = initialState, action) => {
       return {
         ...state,
         roster: payload,
+      }
+    case ROSTER_LOADING:
+      return {
+        ...state,
+        loading: true,
       }
     default:
       return state

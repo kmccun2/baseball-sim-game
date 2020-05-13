@@ -3,6 +3,7 @@ import {
   NEW_ROSTER,
   SET_BORDER,
   CLEAR_LINEUP_ROSTER,
+  ROSTER_LOADING,
 } from './types'
 import axios from 'axios'
 
@@ -96,5 +97,12 @@ export const clearLineupRoster = (roster) => async (dispatch) => {
   return dispatch({
     type: CLEAR_LINEUP_ROSTER,
     payload: new_roster,
+  })
+}
+
+// CLEAR LINEUP
+export const rosterLoading = () => async (dispatch) => {
+  return dispatch({
+    type: ROSTER_LOADING,
   })
 }

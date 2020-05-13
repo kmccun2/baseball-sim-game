@@ -1,6 +1,11 @@
 import React, { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
-import { setRoster, newRoster, clearLineupRoster } from '../actions/roster'
+import {
+  setRoster,
+  newRoster,
+  clearLineupRoster,
+  rosterLoading,
+} from '../actions/roster'
 import { createLineup, clearLineup, newRosterLineup } from '../actions/lineup'
 import { Spinner } from 'react-bootstrap'
 import Directions from './Directions'
@@ -13,6 +18,8 @@ const FileUpload = ({
   newRosterLineup,
   clearLineupRoster,
   roster,
+  rosterLoading,
+  loading,
 }) => {
   const [file, setFile] = useState('')
   const [fileloading1, setFileLoading1] = useState(false)
@@ -52,9 +59,7 @@ const FileUpload = ({
     formData.append('file', file)
 
     const csvPath = '/uploads/lineup.csv'
-    setCreatingRoster1(true)
-    setTimeout(() => setCreatingRoster2(true), 100)
-    setTimeout(() => setCreatingRoster3(true), 200)
+    rosterLoading()
     setTimeout(() => {
       setRoster(csvPath)
       createLineup()
@@ -62,7 +67,7 @@ const FileUpload = ({
       setCreatingRoster2(false)
       setCreatingRoster3(false)
       setRosterExists(true)
-    }, 2500)
+    }, 2000)
   }
 
   // NEW ROSTER
@@ -71,6 +76,7 @@ const FileUpload = ({
     newRoster()
     setRosterExists(false)
     setFilename('Select an exported CSV file from GameChanger...')
+    setDirections(true)
   }
   // CLEAR LINEUP
   const handleClearLineup = () => {
@@ -80,7 +86,7 @@ const FileUpload = ({
 
   return (
     <Fragment>
-      {rosterExists ? (
+      {rosterExists && !loading ? (
         <Fragment>
           <input
             type='submit'
@@ -155,7 +161,12 @@ const FileUpload = ({
               )}
             </div>
           )}
-          {directions && <Directions />}
+          {directions && (
+            <Fragment>
+              <Directions />
+              <div className='credit'>Created by @kurtisleaux</div>
+            </Fragment>
+          )}
         </Fragment>
       )}
     </Fragment>
@@ -164,6 +175,7 @@ const FileUpload = ({
 
 const MapStateToProps = (state) => ({
   roster: state.rosterReducer.roster,
+  loading: state.rosterReducer.loading,
 })
 
 export default connect(MapStateToProps, {
@@ -173,4 +185,5 @@ export default connect(MapStateToProps, {
   newRoster,
   newRosterLineup,
   clearLineupRoster,
+  rosterLoading,
 })(FileUpload)

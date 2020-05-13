@@ -17,7 +17,6 @@ const App = () => {
         <FileUpload />
         <Lineup />
         <Roster />
-        <div className='credit'>Created by @kurtisleaux</div>
       </div>
     </Provider>
   )
