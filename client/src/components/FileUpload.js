@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import {
   setRoster,
   newRoster,
@@ -26,9 +27,6 @@ const FileUpload = ({
   const [fileloading2, setFileLoading2] = useState(false)
   const [fileloading3, setFileLoading3] = useState(false)
   const [directions, setDirections] = useState(true)
-  const [creatingRoster1, setCreatingRoster1] = useState('')
-  const [creatingRoster2, setCreatingRoster2] = useState('')
-  const [creatingRoster3, setCreatingRoster3] = useState('')
   const [rosterExists, setRosterExists] = useState('')
   const [filename, setFilename] = useState(
     'Select an exported CSV file from GameChanger...'
@@ -58,16 +56,18 @@ const FileUpload = ({
     const formData = new FormData()
     formData.append('file', file)
 
-    const csvPath = '/uploads/lineup.csv'
-    rosterLoading()
-    setTimeout(() => {
-      setRoster(csvPath)
+    try {
+      const res = await axios.post('/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+
+      rosterLoading()
+      setRoster(res.data.filePath)
       createLineup()
-      setCreatingRoster1(false)
-      setCreatingRoster2(false)
-      setCreatingRoster3(false)
       setRosterExists(true)
-    }, 2000)
+    } catch {}
   }
 
   // NEW ROSTER
@@ -134,25 +134,6 @@ const FileUpload = ({
                 />
               )}
               {fileloading3 && (
-                <Spinner
-                  className='spinner'
-                  animation='grow'
-                  variant='primary'
-                />
-              )}
-            </div>
-          )}
-          {creatingRoster1 && (
-            <div className='spinner-container'>
-              <Spinner className='spinner' animation='grow' variant='primary' />
-              {creatingRoster2 && (
-                <Spinner
-                  className='spinner'
-                  animation='grow'
-                  variant='primary'
-                />
-              )}
-              {creatingRoster3 && (
                 <Spinner
                   className='spinner'
                   animation='grow'
