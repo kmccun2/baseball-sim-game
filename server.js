@@ -19,7 +19,6 @@ app.post('/upload', (req, res) => {
       console.error(err)
       return res.status(500).send(err)
     }
-    console.log(file.name)
     res.json({ fileName: file.name, filePath: `/uploads/lineup.csv` })
   })
 })

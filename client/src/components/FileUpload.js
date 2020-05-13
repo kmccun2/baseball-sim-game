@@ -14,6 +14,9 @@ const FileUpload = ({ roster, createLineup, setRoster }) => {
   const [fileloading2, setFileLoading2] = useState(false)
   const [fileloading3, setFileLoading3] = useState(false)
   const [directions, setDirections] = useState(true)
+  const [creatingRoster1, setCreatingRoster1] = useState('')
+  const [creatingRoster2, setCreatingRoster2] = useState('')
+  const [creatingRoster3, setCreatingRoster3] = useState('')
   const [filename, setFilename] = useState('Choose File')
   // const [message, setMessage] = useState('')
   // const [uploadPercentage, setUploadPercentage] = useState(0)
@@ -65,9 +68,16 @@ const FileUpload = ({ roster, createLineup, setRoster }) => {
       const { fileName } = res.data
       const csvPath = '/uploads/lineup.csv'
       // setMessage('File Uploaded')
-
-      setRoster(csvPath)
-      createLineup()
+      setCreatingRoster1(true)
+      setTimeout(() => setCreatingRoster2(true), 100)
+      setTimeout(() => setCreatingRoster3(true), 200)
+      setTimeout(() => {
+        setRoster(csvPath)
+        createLineup()
+        setCreatingRoster1(false)
+        setCreatingRoster2(false)
+        setCreatingRoster3(false)
+      }, 2500)
     } catch (err) {
       if (err.response.status === 500) {
         // setMessage('There was a problem with the server')
@@ -108,6 +118,17 @@ const FileUpload = ({ roster, createLineup, setRoster }) => {
             <Spinner className='spinner' animation='grow' variant='primary' />
           )}
           {fileloading3 && (
+            <Spinner className='spinner' animation='grow' variant='primary' />
+          )}
+        </div>
+      )}
+      {creatingRoster1 && (
+        <div className='spinner-container'>
+          <Spinner className='spinner' animation='grow' variant='primary' />
+          {creatingRoster2 && (
+            <Spinner className='spinner' animation='grow' variant='primary' />
+          )}
+          {creatingRoster3 && (
             <Spinner className='spinner' animation='grow' variant='primary' />
           )}
         </div>
