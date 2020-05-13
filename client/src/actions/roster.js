@@ -1,4 +1,9 @@
-import { SET_ROSTER } from './types'
+import {
+  SET_ROSTER,
+  NEW_ROSTER,
+  SET_BORDER,
+  CLEAR_LINEUP_ROSTER,
+} from './types'
 import axios from 'axios'
 
 // CREATE ROSTER
@@ -8,10 +13,8 @@ export const setRoster = (csv) => async (dispatch) => {
 
     // CREATE ROSTER FROM CSV
     let csvfile = res.data
-    console.log(csvfile)
 
     var lines = csvfile.split('\n')
-    console.log(csvfile)
     var result = []
     var headers = lines[1].split(',')
     let all_numbers = []
@@ -37,6 +40,10 @@ export const setRoster = (csv) => async (dispatch) => {
           obj.Number !== 'Glossary:'
         ) {
           result.push(obj)
+          result.map((each) => {
+            each.color = '#00000020'
+            return each
+          })
         }
       }
     }
@@ -47,4 +54,47 @@ export const setRoster = (csv) => async (dispatch) => {
   } catch (err) {
     console.log(err)
   }
+}
+
+// NEW ROSTER
+export const newRoster = () => async (dispatch) => {
+  return dispatch({
+    type: NEW_ROSTER,
+  })
+}
+
+// SET BORDER
+export const setBorder = (lineup, number, active, roster) => async (
+  dispatch
+) => {
+  const spot = lineup.filter((each) => each.id === active)
+  const activecolor = spot[0].color
+  const new_roster = roster.filter((each) => each)
+  new_roster.map((each) => {
+    if (each.color === activecolor) {
+      each.color = '#00000020'
+    }
+    if (each.Number === number) {
+      each.color = activecolor
+    }
+    return each
+  })
+  return dispatch({
+    type: SET_BORDER,
+    payload: new_roster,
+  })
+}
+
+// CLEAR LINEUP
+export const clearLineupRoster = (roster) => async (dispatch) => {
+  let new_roster = roster.filter((each) => each)
+  new_roster.map((each) => {
+    each.color = '#00000020'
+    return each
+  })
+
+  return dispatch({
+    type: CLEAR_LINEUP_ROSTER,
+    payload: new_roster,
+  })
 }

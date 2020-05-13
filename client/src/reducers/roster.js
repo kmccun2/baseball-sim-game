@@ -1,8 +1,12 @@
-import { SET_ROSTER } from '../actions/types'
+import {
+  SET_ROSTER,
+  NEW_ROSTER,
+  SET_BORDER,
+  CLEAR_LINEUP_ROSTER,
+} from '../actions/types'
 
 const initialState = {
   roster: [],
-  loading: true,
 }
 
 const rosterReducer = (state = initialState, action) => {
@@ -14,6 +18,20 @@ const rosterReducer = (state = initialState, action) => {
         ...state,
         roster: payload,
         loading: false,
+      }
+    case NEW_ROSTER:
+      return {
+        roster: [],
+      }
+    case SET_BORDER:
+      return {
+        ...state,
+        roster: payload,
+      }
+    case CLEAR_LINEUP_ROSTER:
+      return {
+        ...state,
+        roster: payload,
       }
     default:
       return state

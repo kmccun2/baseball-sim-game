@@ -14,8 +14,8 @@ const Batter = ({ active, setActive, id, batter }) => {
         className={active === id ? 'icon icon-active' : 'icon'}
         style={
           batter.batter
-            ? { backgroundColor: batter.color, color: 'white' }
-            : { backgroundColor: '#cecece' }
+            ? { backgroundColor: batter.color, color: 'white', border: 'none' }
+            : { backgroundColor: '#f7f7f7' }
         }
         id={id}
         onClick={(e) => handleClick(e)}

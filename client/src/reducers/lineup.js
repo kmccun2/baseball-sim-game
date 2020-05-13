@@ -1,8 +1,12 @@
-import { CREATE_LINEUP } from '../actions/types'
-import { SET_ACTIVE } from '../actions/types'
-import { ASSIGN_PLAYER } from '../actions/types'
-import { UPDATE_LINEUP } from '../actions/types'
-import { SIMULATE_GAME } from '../actions/types'
+import {
+  CREATE_LINEUP,
+  CLEAR_LINEUP,
+  SET_ACTIVE,
+  ASSIGN_PLAYER,
+  UPDATE_LINEUP,
+  SIMULATE_GAME,
+  NEW_ROSTER_LINEUP,
+} from '../actions/types'
 
 const initialState = {
   lineup: [],
@@ -39,10 +43,24 @@ const lineupReducer = (state = initialState, action) => {
         ...state,
         lineup: payload,
       }
+    case CLEAR_LINEUP:
+      return {
+        ...state,
+        lineup: payload.lineup,
+        sim_results: payload.results,
+        active: 0,
+        numActive: 0,
+      }
     case SIMULATE_GAME:
       return {
         ...state,
         sim_results: payload,
+      }
+    case NEW_ROSTER_LINEUP:
+      return {
+        lineup: [],
+        active: 0,
+        numActive: 0,
       }
     default:
       return state

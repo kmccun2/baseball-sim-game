@@ -4,12 +4,21 @@ body {
 }
 #root {
   min-height: 100vh;
+  margin-top: 60px;
 }
 .bold-e {
   font-weight: 800 !important;
 }
 .bold-f {
   font-weight: 500 !important;
+}
+.center {
+  margin: 0 auto;
+}
+.clear-lineup {
+  background-color: white !important;
+  color: #000000 !important;
+  border: 1px solid #dfdfdf !important;
 }
 .logo {
   height: 95px;
@@ -117,8 +126,9 @@ body {
   text-align: center;
   font-weight: 800;
   font-size: 26px;
-  line-height: 2.3;
-  background-color: #cecece;
+  line-height: 2.2;
+  background-color: #f7f7f7;
+  border: 1px solid #e0e0e0;
 }
 
 .icon-active {

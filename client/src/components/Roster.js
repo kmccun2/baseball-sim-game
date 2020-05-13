@@ -21,6 +21,7 @@ const Roster = ({ roster, active, lineup, assignPlayer }) => {
                 bb={(parseInt(each.HBP, 10) + parseInt(each.BB, 10)).toString()}
                 ks={each.SO}
                 key={each.Number}
+                color={each.color}
               />
             ))}
           </div>

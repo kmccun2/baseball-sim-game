@@ -1,8 +1,12 @@
-import { SET_ACTIVE } from './types'
-import { CREATE_LINEUP } from './types'
-import { ASSIGN_PLAYER } from './types'
-import { UPDATE_LINEUP } from './types'
-import { SIMULATE_GAME } from './types'
+import {
+  SET_ACTIVE,
+  NEW_ROSTER_LINEUP,
+  CREATE_LINEUP,
+  ASSIGN_PLAYER,
+  UPDATE_LINEUP,
+  SIMULATE_GAME,
+  CLEAR_LINEUP,
+} from './types'
 
 // SELECT ACTIVE LINEUP SPOT
 export const createLineup = () => async (dispatch) => {
@@ -15,7 +19,7 @@ export const createLineup = () => async (dispatch) => {
     { batter: null, color: '#f1c40f', id: 5 },
     { batter: null, color: '#2980b9', id: 6 },
     { batter: null, color: '#e67e22', id: 7 },
-    { batter: null, color: '#8e44ad', id: 8 },
+    { batter: null, color: '#ce7373', id: 8 },
   ]
 
   dispatch({
@@ -497,5 +501,31 @@ export const simulateGame = (lineup, games, innings) => async (dispatch) => {
   return dispatch({
     type: SIMULATE_GAME,
     payload: results,
+  })
+}
+
+// CLEAR LINEUP
+export const clearLineup = () => async (dispatch) => {
+  const lineup = [
+    { batter: null, color: '#1abc9c', id: 0 },
+    { batter: null, color: '#e74c3c', id: 1 },
+    { batter: null, color: '#8e44ad', id: 2 },
+    { batter: null, color: '#34495e', id: 3 },
+    { batter: null, color: '#2ecc71', id: 4 },
+    { batter: null, color: '#f1c40f', id: 5 },
+    { batter: null, color: '#2980b9', id: 6 },
+    { batter: null, color: '#e67e22', id: 7 },
+    { batter: null, color: '#8e44ad', id: 8 },
+  ]
+  return dispatch({
+    type: CLEAR_LINEUP,
+    payload: { lineup: lineup, results: null },
+  })
+}
+
+// SELECT ACTIVE LINEUP SPOT
+export const newRosterLineup = (id) => async (dispatch) => {
+  return dispatch({
+    type: NEW_ROSTER_LINEUP,
   })
 }
