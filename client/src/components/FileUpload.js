@@ -116,7 +116,6 @@ const FileUpload = ({
             type='submit'
             value='Upload'
             className='btn btn-primary btn-block mt-4'
-            disabled={isSubmitted}
             onClick={onSubmit}
           >
             Upload
