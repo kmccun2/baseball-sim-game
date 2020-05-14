@@ -1,6 +1,6 @@
 # GC Upload
 
-> This is a full stack React-Express application that uploads a CSV exported from gc.com that contains a baseball team's season stats and allows the user to play simulated games using the players from the roster.
+> This is a full stack React-Express application uploads a CSV exported from gc.com containing a baseball team's season stats and allows the user to play simulated games using the players from the roster.
 
 ## Quick Start
 
