@@ -4,57 +4,51 @@ import {
   SET_BORDER,
   CLEAR_LINEUP_ROSTER,
   ROSTER_LOADING,
+  LOAD_CSV,
 } from './types'
-import axios from 'axios'
 
 // CREATE ROSTER
 export const setRoster = (csv) => async (dispatch) => {
-  try {
-    const res = await axios.get(csv)
+  let csvfile = csv
 
-    // CREATE ROSTER FROM CSV
-    let csvfile = res.data
+  var lines = csvfile.split('\n')
+  var result = []
+  var headers = lines[1].split(',')
+  console.log(headers)
+  let all_numbers = []
 
-    var lines = csvfile.split('\n')
-    var result = []
-    var headers = lines[1].split(',')
-    let all_numbers = []
+  for (var i = 1; i < lines.length; i++) {
+    var obj = {}
+    var currentline = lines[i].split(',')
 
-    for (var i = 1; i < lines.length; i++) {
-      var obj = {}
-      var currentline = lines[i].split(',')
+    for (var j = 0; j < 53; j++) {
+      obj[headers[j]] = currentline[j]
+    }
 
-      for (var j = 0; j < 53; j++) {
-        obj[headers[j]] = currentline[j]
+    // CHECK TO MAKE SURE ROSTER NUMBER DOESN'T EXIST BEFORE ADDING
+    if (all_numbers.includes(currentline[0]) === false) {
+      all_numbers.push(currentline[0])
+      if (currentline[0] === 'Team') {
+        break
       }
-
-      // CHECK TO MAKE SURE ROSTER NUMBER DOESN'T EXIST BEFORE ADDING
-      if (all_numbers.includes(currentline[0]) === false) {
-        all_numbers.push(currentline[0])
-        if (currentline[0] === 'Team') {
-          break
-        }
-        if (
-          obj.Number !== '' &&
-          obj.Number !== 'Number' &&
-          obj.Number !== 'Team' &&
-          obj.Number !== 'Glossary:'
-        ) {
-          result.push(obj)
-          result.map((each) => {
-            each.color = '#00000020'
-            return each
-          })
-        }
+      if (
+        obj.Number !== '' &&
+        obj.Number !== 'Number' &&
+        obj.Number !== 'Team' &&
+        obj.Number !== 'Glossary:'
+      ) {
+        result.push(obj)
+        result.map((each) => {
+          each.color = '#00000020'
+          return each
+        })
       }
     }
-    dispatch({
-      type: SET_ROSTER,
-      payload: result,
-    })
-  } catch (err) {
-    console.log(err)
   }
+  dispatch({
+    type: SET_ROSTER,
+    payload: result,
+  })
 }
 
 // NEW ROSTER
@@ -104,5 +98,13 @@ export const clearLineupRoster = (roster) => async (dispatch) => {
 export const rosterLoading = () => async (dispatch) => {
   return dispatch({
     type: ROSTER_LOADING,
+  })
+}
+
+// NEW ROSTER
+export const loadCsv = (csv) => async (dispatch) => {
+  return dispatch({
+    type: LOAD_CSV,
+    payload: csv,
   })
 }

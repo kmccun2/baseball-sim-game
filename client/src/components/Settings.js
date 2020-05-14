@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { simulateGame } from '../actions/lineup'
 import Results from './Results'
 
-const Settings = ({ lineup, simulateGame, sim_results }) => {
+const Settings = ({ lineup, simulateGame, sim_results, stateCsv }) => {
   const validationSchema = Yup.object().shape({
     games: Yup.number()
       .typeError('Games input must be a number.')
@@ -26,7 +26,11 @@ const Settings = ({ lineup, simulateGame, sim_results }) => {
   return (
     <Fragment>
       <Formik
-        initialValues={{ games: 40, innings: 7 }}
+        initialValues={
+          stateCsv.includes('20 NYM,Alonso,Pete')
+            ? { games: 162, innings: 9 }
+            : { games: 40, innings: 7 }
+        }
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true)
@@ -99,6 +103,7 @@ const Settings = ({ lineup, simulateGame, sim_results }) => {
 const MapStateToProps = (state) => ({
   lineup: state.lineupReducer.lineup,
   sim_results: state.lineupReducer.sim_results,
+  stateCsv: state.rosterReducer.stateCsv,
 })
 
 export default connect(MapStateToProps, { simulateGame })(Settings)
