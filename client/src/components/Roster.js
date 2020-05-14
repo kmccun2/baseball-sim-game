@@ -11,7 +11,7 @@ const Roster = ({ roster, active, lineup, assignPlayer }) => {
           <div className='player-cards mx-n2'>
             {roster.map((each) => (
               <Player
-                name={each.First + ' ' + each.Last}
+                name={each.Last + ', ' + each.First}
                 number={each.Number}
                 ab={each.AB}
                 avg={each.AVG}

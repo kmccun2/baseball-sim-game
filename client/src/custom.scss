@@ -15,6 +15,16 @@ body {
 .center {
   margin: 0 auto;
 }
+.mlb-roster {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0 !important;
+  padding: 10px 15px;
+}
+.mlb-roster:hover {
+  background-color: #f3f3f3;
+}
 .clear-lineup {
   background-color: white !important;
   color: #000000 !important;
@@ -84,6 +94,9 @@ body {
 .custom-file-label {
   overflow: hidden;
   word-break: break-all;
+}
+.custom-file-input {
+  cursor: pointer;
 }
 .spinner-container {
   width: 100%;

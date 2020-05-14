@@ -50,6 +50,15 @@ const FileUpload = ({
     }, 4000)
   }
 
+  const handleMLBClick = (e) => {
+    e.preventDefault()
+    let csvPath = '/uploads/lineup.csv'
+    rosterLoading()
+    setRoster(csvPath)
+    createLineup()
+    setRosterExists(true)
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitted(true)
@@ -63,10 +72,18 @@ const FileUpload = ({
         },
       })
 
-      rosterLoading()
-      setRoster(res.data.filePath)
-      createLineup()
-      setRosterExists(true)
+      // RENAME FILE WITHOUT SPACES
+      let nospaces = res.data.filePath.replace(' ', '')
+      if (res.data.fileName.includes('.csv') === false) {
+        alert('Uploaded file must be in CSV format. Try again.')
+        handleNewRoster()
+        setIsSubmitted(false)
+      } else {
+        rosterLoading()
+        setRoster(nospaces)
+        createLineup()
+        setRosterExists(true)
+      }
     } catch {}
   }
 
@@ -103,6 +120,9 @@ const FileUpload = ({
         </Fragment>
       ) : (
         <Fragment>
+          <div className='mlb-roster' onClick={handleMLBClick}>
+            Use MLB Roster File
+          </div>
           <form onSubmit={onSubmit}>
             <div className='custom-file mb-4'>
               <input

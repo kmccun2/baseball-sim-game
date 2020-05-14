@@ -12,7 +12,6 @@ const Player = ({
   avg,
   slg,
   ops,
-  sb,
   bb,
   ks,
   roster,
@@ -26,6 +25,17 @@ const Player = ({
     assignPlayer(lineup, active, roster, number)
     setBorder(lineup, number, active, roster)
   }
+
+  // REMOVE 0 FROM FRONT OF STATS
+  let new_avg = parseFloat(avg).toFixed(3).toString()
+  new_avg = new_avg.replace('0.', '.')
+
+  let new_slg = parseFloat(slg).toFixed(3).toString()
+  new_slg = new_slg.replace('0.', '.')
+
+  let new_ops = parseFloat(ops).toFixed(3).toString()
+  new_ops = new_ops.replace('0.', '.')
+
   return (
     <div
       className='player col-md-3 p-2'
@@ -36,27 +46,22 @@ const Player = ({
           <Card.Title className='bold-e'>{name}</Card.Title>
           <Card.Subtitle className='mb-4 text-muted'>#{number}</Card.Subtitle>
           <Card.Text className='stat-title my-0'>
-            At Bats: <span className='stat-text'>{ab}</span>
+            AB: <span className='stat-text'>{ab}</span>
           </Card.Text>
           <Card.Text className='stat-title my-0'>
-            Average:{' '}
-            <span className='stat-text'>{parseFloat(avg).toFixed(3)}</span>
+            AVG: <span className='stat-text'>{new_avg}</span>
           </Card.Text>
           <Card.Text className='stat-title my-0'>
-            Slugging:{' '}
-            <span className='stat-text'>{parseFloat(slg).toFixed(3)}</span>
+            SLG: <span className='stat-text'>{new_slg}</span>
           </Card.Text>
           <Card.Text className='stat-title my-0'>
-            OPS: <span className='stat-text'>{parseFloat(ops).toFixed(3)}</span>
+            OPS: <span className='stat-text'>{new_ops}</span>
           </Card.Text>
           <Card.Text className='stat-title my-0'>
-            Walks/HBP: <span className='stat-text'>{bb}</span>
+            BB/HBP: <span className='stat-text'>{bb}</span>
           </Card.Text>
           <Card.Text className='stat-title my-0'>
-            K: <span className='stat-text'>{ks}</span>
-          </Card.Text>
-          <Card.Text className='stat-title my-0'>
-            SB: <span className='stat-text'>{sb}</span>
+            SO: <span className='stat-text'>{ks}</span>
           </Card.Text>
         </Card.Body>
       </Card>
