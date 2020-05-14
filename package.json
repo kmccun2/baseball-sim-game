@@ -20,7 +20,7 @@
     "yup": "^0.28.5"
   },
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
+    "start": "react-scripts run",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
