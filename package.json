@@ -2,6 +2,7 @@
   "name": "baseball-sim-game",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://baseball-sim-game.herokuapp.com/",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "formik": "^2.1.4",
@@ -22,7 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,6 +35,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:5000",
-  "homepage": "http://baseball-sim-game.github.io/myapp"
+  "proxy": "http://localhost:5000"
 }
