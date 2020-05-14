@@ -8,7 +8,6 @@ import {
   loadCsv,
 } from '../actions/roster'
 import { createLineup, clearLineup, newRosterLineup } from '../actions/lineup'
-import { Spinner } from 'react-bootstrap'
 import Directions from './Directions'
 import ReactFileReader from 'react-file-reader'
 
@@ -26,13 +25,11 @@ const FileUpload = ({
   loadCsv,
   storedCsv,
 }) => {
-  const [csvfile, setCsvFile] = useState('/uploads/lineup.csv')
   const [directions, setDirections] = useState(true)
   const [rosterExists, setRosterExists] = useState('')
   const [filename, setFilename] = useState(
     'Select an exported CSV file from GameChanger...'
   )
-  const [isSubmitted, setIsSubmitted] = useState('')
 
   const handleMLBClick = (e) => {
     e.preventDefault()
