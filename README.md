@@ -7,11 +7,5 @@
 ```bash
 # Install dependencies server/client
 npm install
-cd client
-npm install
-
-# Serve on localhost:3000
-npm run dev
+npm start
 ```
-
-# A sample upload file can be found in client/public/uploads/players.csv
