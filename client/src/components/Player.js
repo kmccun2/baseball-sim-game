@@ -38,7 +38,7 @@ const Player = ({
 
   return (
     <div
-      className='player col-md-3 p-2'
+      className='player col-xs-6 col-lg-3 col-md-4 col-sm-6  p-2'
       onClick={(e) => handleClick(lineup, active, roster, number)}
     >
       <Card style={{ border: '3px solid ' + color }}>

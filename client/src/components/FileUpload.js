@@ -99,7 +99,7 @@ const FileUpload = ({
       ) : (
         <Fragment>
           <div className='mlb-roster' onClick={handleMLBClick}>
-            Use MLB Roster File
+            Use MLB Players
           </div>
 
           <ReactFileReader handleFiles={handleFiles} fileTypes={'.csv'}>
