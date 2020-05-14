@@ -1,5 +1,5 @@
 {
-  "name": "GC Lineup Simulator",
+  "name": "baseball-sim-game",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
