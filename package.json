@@ -2,7 +2,7 @@
   "name": "baseball-sim-game",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://baseball-sim-game.herokuapp.com/",
+  "homepage": "https://kmccun2.github.io/baseball-sim-game",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "formik": "^2.1.4",
@@ -18,6 +18,11 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "yup": "^0.28.5"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
   },
   "engines": {
     "node": ">=12.16.2",
@@ -40,4 +45,3 @@
     "not op_mini all"
   ]
 }
-
