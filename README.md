@@ -5,7 +5,7 @@
 ## Quick Start
 
 ```bash
-# Install dependencies server/client
+# Install dependencies
 npm install
 npm start
 ```
